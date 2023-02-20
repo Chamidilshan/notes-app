@@ -31,7 +31,7 @@ class NoteList extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(
-              builder: (context) => NoteModify())
+              builder: (context) => NoteModify(''))
           );
         },
       ),
@@ -45,7 +45,7 @@ class NoteList extends StatelessWidget {
             ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => NoteModify())
+                    builder: (context) => NoteModify(notes[index].noteID))
                 );
               },
               subtitle: Text(
