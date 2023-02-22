@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class NoteModify extends StatelessWidget {
 
   final String noteID;
+  bool get isEditing => noteID != null;
   NoteModify(this.noteID);
 
   @override
@@ -10,7 +11,7 @@ class NoteModify extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         // ignore: unnecessary_null_comparison
-        title: Text( noteID == '' ? 'Create note' : 'Edit note',
+        title: Text( isEditing ? 'Edit note' : 'Create note',
         ),
       ),
       body: Padding(

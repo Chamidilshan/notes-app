@@ -1,6 +1,7 @@
 import 'package:explore_notes_app/models/notes_for_listing.dart';
 import 'package:explore_notes_app/screens/note_modify.dart';
 import 'package:flutter/material.dart';
+import 'package:explore_notes_app/views/note_delete.dart';
 
 class NoteList extends StatelessWidget {
 
@@ -37,19 +38,32 @@ class NoteList extends StatelessWidget {
       ),
       body: ListView.separated(
           itemBuilder: (_, index) {
-            return ListTile(
-              title: Text(notes[index].noteTitle,
-                style: TextStyle(
-                  color: Colors.blueAccent,
-                ),
-            ),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => NoteModify(notes[index].noteID))
+            return Dismissible(
+              key: ValueKey(notes[index].noteID),
+              direction: DismissDirection.startToEnd,
+              onDismissed: (direction){},
+              confirmDismiss: (direction) async{
+                final result = await showDialog(
+                    context: context,
+                    builder: (_)=> NoteDelete(),
                 );
-              },
-              subtitle: Text(
-                'Last edited on ${formatDateTime(notes[index].lastEditedDateTime)}'
+                return result;
+                print(result);
+            },
+              child: ListTile(
+                title: Text(notes[index].noteTitle,
+                  style: TextStyle(
+                    color: Colors.blueAccent,
+                  ),
+              ),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => NoteModify(notes[index].noteID))
+                  );
+                },
+                subtitle: Text(
+                  'Last edited on ${formatDateTime(notes[index].lastEditedDateTime)}'
+                ),
               ),
             );
           },
