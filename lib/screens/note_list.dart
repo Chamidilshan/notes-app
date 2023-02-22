@@ -50,6 +50,16 @@ class NoteList extends StatelessWidget {
                 return result;
                 print(result);
             },
+              background: Container(
+                color: Colors.red,
+                padding: EdgeInsets.only(left: 16.0),
+                child: Align(
+                  child: Icon(Icons.delete,
+                    color: Colors.white,
+                  ),
+                  alignment: Alignment.centerLeft,
+                ),
+              ),
               child: ListTile(
                 title: Text(notes[index].noteTitle,
                   style: TextStyle(
