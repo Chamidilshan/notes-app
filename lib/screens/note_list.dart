@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:explore_notes_app/data_Service.dart';
 
+import 'package:explore_notes_app/data_Service.dart';
 import 'package:explore_notes_app/models/notes_for_listing.dart';
 import 'package:explore_notes_app/screens/note_modify.dart';
 import 'package:explore_notes_app/services/notes_services.dart';
@@ -9,14 +11,13 @@ import 'package:http/http.dart' as http;
 
 class NoteList extends StatelessWidget {
 
-  List<dynamic> users = [];
-  final service = NotesService();
+  // List<dynamic> users = [];
+  // final service = NotesService();
+  final dataService = DataService();
 
   get notes => null;
 
-  String formatDateTime(DateTime dateTime){
-    return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,15 +44,7 @@ class NoteList extends StatelessWidget {
   }
 }
 
-void fetchUsers() async{
-  print('fetchUsers called');
-  final url = 'https://randomuser.me/api/?results=5';
-  final uri = Uri.parse(url);
-  final response = await http.get(uri);
-  final body = response.body;
-  final json = jsonDecode(body);
-}
 
 void _makeRequest() async{
-
+  // final response = dataService.makeRequestToApi();
 }
