@@ -31,7 +31,14 @@ class NoteList extends StatelessWidget {
           );
         },
       ),
-      body: FloatingActionButton(onPressed: fetchUsers),
+      body: Center(
+        child: ElevatedButton(
+          child: Text(
+            'Make a request',
+          ),
+          onPressed: _makeRequest,
+        ),
+      )
     );
   }
 }
@@ -43,4 +50,8 @@ void fetchUsers() async{
   final response = await http.get(uri);
   final body = response.body;
   final json = jsonDecode(body);
+}
+
+void _makeRequest() async{
+
 }
