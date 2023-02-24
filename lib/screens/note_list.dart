@@ -3,10 +3,13 @@ import 'package:explore_notes_app/screens/note_modify.dart';
 import 'package:explore_notes_app/services/notes_services.dart';
 import 'package:flutter/material.dart';
 import 'package:explore_notes_app/views/note_delete.dart';
+import 'package:http/http.dart' as http;
 
 class NoteList extends StatelessWidget {
 
   final service = NotesService();
+
+  get notes => null;
 
   String formatDateTime(DateTime dateTime){
     return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
@@ -25,50 +28,14 @@ class NoteList extends StatelessWidget {
           );
         },
       ),
-      body: ListView.separated(
-          itemBuilder: (_, index) {
-            return Dismissible(
-              key: ValueKey(notes[index].noteID),
-              direction: DismissDirection.startToEnd,
-              onDismissed: (direction){},
-              confirmDismiss: (direction) async{
-                final result = await showDialog(
-                    context: context,
-                    builder: (_)=> NoteDelete(),
-                );
-                return result;
-                print(result);
-            },
-              background: Container(
-                color: Colors.red,
-                padding: EdgeInsets.only(left: 16.0),
-                child: Align(
-                  child: Icon(Icons.delete,
-                    color: Colors.white,
-                  ),
-                  alignment: Alignment.centerLeft,
-                ),
-              ),
-              child: ListTile(
-                title: Text(notes[index].noteTitle,
-                  style: TextStyle(
-                    color: Colors.blueAccent,
-                  ),
-              ),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => NoteModify(notes[index].noteID))
-                  );
-                },
-                subtitle: Text(
-                  'Last edited on ${formatDateTime(notes[index].lastEditedDateTime)}'
-                ),
-              ),
-            );
-          },
-          separatorBuilder: (_, __) => Divider(height: 1, color: Colors.blue,),
-          itemCount: notes.length
-      ),
+      body: FloatingActionButton(onPressed: fetchUsers),
     );
   }
+}
+
+void fetchUsers(){
+  print('fetchUsers called');
+  final url = '';
+  final uri = Uri.parse(url);
+  http.get(uri);
 }
