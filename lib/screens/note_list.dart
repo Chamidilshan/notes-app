@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:explore_notes_app/models/notes_for_listing.dart';
 import 'package:explore_notes_app/screens/note_modify.dart';
 import 'package:explore_notes_app/services/notes_services.dart';
@@ -7,6 +9,7 @@ import 'package:http/http.dart' as http;
 
 class NoteList extends StatelessWidget {
 
+  List<dynamic> users = [];
   final service = NotesService();
 
   get notes => null;
@@ -33,9 +36,11 @@ class NoteList extends StatelessWidget {
   }
 }
 
-void fetchUsers(){
+void fetchUsers() async{
   print('fetchUsers called');
-  final url = '';
+  final url = 'https://randomuser.me/api/?results=5';
   final uri = Uri.parse(url);
-  http.get(uri);
+  final response = await http.get(uri);
+  final body = response.body;
+  final json = jsonDecode(body);
 }
