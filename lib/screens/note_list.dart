@@ -1,24 +1,13 @@
 import 'package:explore_notes_app/models/notes_for_listing.dart';
 import 'package:explore_notes_app/screens/note_modify.dart';
+import 'package:explore_notes_app/services/notes_services.dart';
 import 'package:flutter/material.dart';
 import 'package:explore_notes_app/views/note_delete.dart';
 
 class NoteList extends StatelessWidget {
 
-  final notes = [
-     NoteForListing(
-        noteID: '1',
-        noteTitle: 'Hello',
-        createdDateTime: DateTime.now(),
-         lastEditedDateTime: DateTime.now()
-     ),
-    NoteForListing(
-        noteID: '2',
-        noteTitle: 'World',
-        createdDateTime: DateTime.now(),
-        lastEditedDateTime: DateTime.now()
-    ),
-  ];
+  final service = NotesService();
+
   String formatDateTime(DateTime dateTime){
     return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
   }
