@@ -1,6 +1,5 @@
-import 'package:explore_notes_app/screens/note_list.dart';
+import 'package:explore_notes_app/screens/home_page.dart';
 import 'package:explore_notes_app/services/notes_services.dart';
-import 'package:explore_notes_app/views/note_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -20,9 +19,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
-      home: NoteList(),
+      home: HomePage(),
     );
   }
 }
