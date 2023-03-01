@@ -9,15 +9,18 @@ import 'package:flutter/material.dart';
 import 'package:explore_notes_app/views/note_delete.dart';
 import 'package:http/http.dart' as http;
 
-class NoteList extends StatelessWidget {
 
-  // List<dynamic> users = [];
-  // final service = NotesService();
-  final dataService = DataService();
 
+
+class NoteList extends StatefulWidget {
+  @override
+  State<NoteList> createState() => _NoteListState();
+}
+
+class _NoteListState extends State<NoteList> {
+  String _response = 'Hello';
+  final _dataService = DataService();
   get notes => null;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -32,19 +35,36 @@ class NoteList extends StatelessWidget {
           );
         },
       ),
-      body: Center(
-        child: ElevatedButton(
-          child: Text(
-            'Make a request',
-          ),
-          onPressed: _makeRequest,
-        ),
+      body: Builder(
+        builder: (_) {
+          if(_response != null){
+            return Column(
+              children: [
+                ElevatedButton(
+                  child: Text(
+                    'Make a request',
+                  ),
+                  onPressed: _makeRequest,
+                ),
+                  Text(_response),
+              ],
+            );
+          }else {
+            return ElevatedButton(
+              child: Text(
+                'Make a request',
+              ),
+              onPressed: _makeRequest,
+            );
+          }
+        },
       )
     );
+  }
+  void _makeRequest() async{
+    final response = await _dataService.makeRequestToApi();
+    setState(() => _response = response);
   }
 }
 
 
-void _makeRequest() async{
-  // final response = dataService.makeRequestToApi();
-}
