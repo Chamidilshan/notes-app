@@ -44,8 +44,41 @@ class _HomePageState extends State<HomePage> {
         child: ListView.builder(
             itemBuilder: (context, index){
               return Container(
-                child: Text(
-                  posts![index].title
+                child: Row(
+                  children: [
+                    Container(
+                      height: 50.0,
+                      width: 50.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Colors.grey
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            posts![index].title,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          Text(
+                              posts![index].body ?? ''
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               );
             },
