@@ -1,3 +1,4 @@
+import 'package:explore_notes_app/services/remote_services.dart';
 import 'package:flutter/material.dart';
 import 'package:explore_notes_app/models/post.dart';
 
@@ -20,7 +21,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   getData() async {
-
+    posts = await RemoteService().getPosts();
+    if(posts != null){
+      setState(() {
+        isLoaded = true;
+      });
+    }
   }
 
 
@@ -33,15 +39,21 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: true,
       ),
-      body: ListView.builder(
-          itemBuilder: (context, index){
-            return Container(
-              child: Text(
-                'Hi'
-              ),
-            );
-          },
-          itemCount: 10,
+      body: Visibility(
+        visible: isLoaded,
+        child: ListView.builder(
+            itemBuilder: (context, index){
+              return Container(
+                child: Text(
+                  posts![index].title
+                ),
+              );
+            },
+            itemCount: posts?.length,
+        ),
+        replacement: Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }
