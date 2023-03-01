@@ -13,12 +13,35 @@ class _HomePageState extends State<HomePage> {
   var isLoaded = false;
 
   @override
+  void initState() {
+    super.initState();
+
+    getData();
+  }
+
+  getData() async {
+
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Posts'
         ),
+        centerTitle: true,
+      ),
+      body: ListView.builder(
+          itemBuilder: (context, index){
+            return Container(
+              child: Text(
+                'Hi'
+              ),
+            );
+          },
+          itemCount: 10,
       ),
     );
   }
